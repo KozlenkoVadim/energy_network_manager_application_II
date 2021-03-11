@@ -4,15 +4,15 @@ import network.nodsManager.Node;
 
 public interface NetworkServices {
 
-    public void buildNetwork();
+    void buildNetwork();
 
-    public void deleteNetwork(Node network);
+    void deleteNetwork(Node network);
 
-    public void searchNetworksOnPc();
+    void searchNetworksOnPc();
 
-    public Node loadNetworkFromFile();
+    Node loadNetworkFromFile();
 
-    public void toFile(Node network);
+    void toFile(Node network);
 
 
 }
