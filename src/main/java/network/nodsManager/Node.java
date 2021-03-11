@@ -1,14 +1,13 @@
 package network.nodsManager;
 
 
-
 import java.util.ArrayList;
 
 public class Node {
     private String id;
     private Types type;
     private String name;
-    private String descriptions;
+    private String description;
     private Params params;
     private ArrayList<Node> children = new ArrayList<>();
 
@@ -16,7 +15,7 @@ public class Node {
         this.id = id;
         this.type = type;
         this.name = name;
-        this.descriptions = descriptions;
+        this.description = descriptions;
         this.params = params;
         this.children = children;
     }
@@ -25,27 +24,27 @@ public class Node {
         this.id = id;
         this.type = type;
         this.name = name;
-        this.descriptions = descriptions;
+        this.description = descriptions;
         this.params = params;
     }
 
-    public static Node createNodeTypeNetwork(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children){
+    public static Node createNodeTypeNetwork(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children) {
         return new Node(id, Types.NETWORK, name, descriptions, Params.createParamsForNodeTypeNotResources(params.getLon(), params.getLat()), children);
     }
 
-    public static Node createNodeTypeSubstation(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children){
+    public static Node createNodeTypeSubstation(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children) {
         return new Node(id, Types.SUBSTATION, name, descriptions, Params.createParamsForNodeTypeNotResources(params.getLon(), params.getLat()), children);
     }
 
-    public static Node createNodeTypeTransformer(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children){
+    public static Node createNodeTypeTransformer(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children) {
         return new Node(id, Types.TRANSFORMER, name, descriptions, Params.createParamsForNodeTypeNotResources(params.getLon(), params.getLat()), children);
     }
 
-    public static Node createNodeTypeFeeder(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children){
+    public static Node createNodeTypeFeeder(String id, Types type, String name, String descriptions, Params params, ArrayList<Node> children) {
         return new Node(id, Types.FEEDER, name, descriptions, Params.createParamsForNodeTypeNotResources(params.getLon(), params.getLat()), children);
     }
 
-    public static Node createNodeTypeResource(String id, Types type, String name, String descriptions, Params params){
+    public static Node createNodeTypeResource(String id, Types type, String name, String descriptions, Params params) {
         return new Node(id, Types.RESOURCE, name, descriptions, Params.createParamsForNodeTypeResources(params.getConsumes(), params.getUnits()));
     }
 
@@ -74,11 +73,11 @@ public class Node {
     }
 
     public String getDescriptions() {
-        return descriptions;
+        return description;
     }
 
     public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+        this.description = descriptions;
     }
 
     public Params getParams() {
@@ -99,13 +98,14 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{ " +
-                "id= '" + id + '\'' +
-                ", type= " + type +
-                ", name='" + name + '\'' +
-                ", descriptions='" + descriptions + '\'' +
-                ", params=" + params +
-                ", children=" + children +
+        return this.getType().toString() + ":" + "\n" +
+                '{' + "\n" +
+                "   " + "id = " + id + "\n" +
+                "   " + "type = " + type + "\n" +
+                "   " + "name = " + name + "\n" +
+                "   " + "description = " + description + "\n" +
+                "   " + getParams().toString() + "\n" +
+                "   " + "children = " + children + "\n" +
                 '}';
     }
 }

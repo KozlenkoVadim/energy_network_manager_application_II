@@ -61,11 +61,10 @@ public class Params {
 
     @Override
     public String toString() {
-        return "Params{" +
-                "lon=" + lon +
-                ", lat=" + lat +
-                ", consumes='" + consumes + '\'' +
-                ", units='" + units + '\'' +
-                '}';
+        return
+                "longitude = " + lon + "\n" +
+                        "   " + "latitude = " + lat + "\n" +
+                        "   " + "consumes = " + consumes + "\n" +
+                        "   " + "units = " + units;
     }
 }
