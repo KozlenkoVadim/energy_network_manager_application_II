@@ -1,18 +1,13 @@
 package network.services;
 
-import network.nodsManager.Node;
+import network.model.Node;
+
+import java.io.File;
+import java.util.List;
 
 public interface NetworkServices {
 
-    void buildNetwork();
-
     void deleteNetwork(Node network);
 
-    void searchNetworksOnPc();
-
-    Node loadNetworkFromFile();
-
-    void toFile(Node network);
-
-
+    List<File> searchNetworks(String pathName);
 }
