@@ -1,13 +1,14 @@
-package network.services;
+package network;
 
 import network.model.Node;
-import network.model.Params;
+import network.services.NodeServices;
 
 public class NodeManager implements NodeServices {
 
     private static void print(String string) {
         System.out.println(string);
     }
+
 
     @Override
     public Node searchNodeInNetwork(Node network, String id) {
