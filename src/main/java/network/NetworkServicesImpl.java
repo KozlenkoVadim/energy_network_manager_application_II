@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import network.model.Node;
 import network.services.NetworkServices;
-import network.services.SaveOrLoadService;
+import network.services.NetworkRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @Setter
 @Getter
-public class NetworkManager implements NetworkServices, SaveOrLoadService {
+public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
     private Node network;
 
     @Override
@@ -27,13 +27,17 @@ public class NetworkManager implements NetworkServices, SaveOrLoadService {
     }
 
     @Override
-    public List<File> searchNetworks(String pathName) {
+    public List<String> searchNetworks(String pathName) {
         List<File> rezultList = new LinkedList<>();
+        List<String> nameList = new LinkedList<>();
         fileSearch(new File(pathName), rezultList);
         for (File file : rezultList) {
             System.out.println(file.getName());
         }
-        return rezultList;
+        for (File file: rezultList) {
+            nameList.add(file.getName());
+        }
+        return nameList;
     }
 
     private static void fileSearch(@NotNull File file, List<File> rezultList) {

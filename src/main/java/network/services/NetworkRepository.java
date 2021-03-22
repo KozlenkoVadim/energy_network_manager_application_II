@@ -4,7 +4,7 @@ import network.model.Node;
 
 import java.io.IOException;
 
-public interface SaveOrLoadService {
+public interface NetworkRepository {
 
     // This method returns the model of network from Json file
     // You must assign the path to yours networks and
