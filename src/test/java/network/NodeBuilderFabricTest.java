@@ -1,6 +1,5 @@
 package network;
 
-import network.NodeBuilderFabric;
 import network.model.Node;
 import network.model.Params;
 import network.model.Types;

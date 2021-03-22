@@ -1,26 +1,32 @@
 package network;
 
+
 import network.model.Node;
 import network.services.NodeServices;
 
+import java.util.logging.Logger;
+
+
 public class NodeManager implements NodeServices {
+    private static final Logger LOGGER = Logger.getLogger("NodeManager");
 
     private static void print(String string) {
         System.out.println(string);
     }
-
 
     @Override
     public Node searchNodeInNetwork(Node network, String id) {
         Node entry = null;
         try {
             if (network.getId().equals(id)) {
-                print("Your node is " + network.getName() + " !");
+                LOGGER.info("Your node is " + network.getName() + " !");
+                //print("Your node is " + network.getName() + " !");
                 entry = network;
             } else {
                 for (Node node : network.getChildren()) {
                     if (node.getId().equals(id)) {
-                        print("Your node is " + node.getName() + " !");
+                        LOGGER.info("Your node is " + node.getName() + " !");
+                        //print("Your node is " + node.getName() + " !");
                         entry = node;
                     } else if (node.getChildren() != null) {
                         searchNodeInNetwork(node, id);
@@ -28,7 +34,8 @@ public class NodeManager implements NodeServices {
                 }
             }
         } catch (NullPointerException e) {
-            print("You entered an incorrect node name, entry's id, or it does not exist! ");
+            LOGGER.info("You entered an incorrect node name, entry's id, or it does not exist! ");
+           // print("You entered an incorrect node name, entry's id, or it does not exist! ");
         }
         return entry;
     }
@@ -52,7 +59,8 @@ public class NodeManager implements NodeServices {
                 network = null;
             }
         } catch (NullPointerException e) {
-            print("You entered an incorrect network name, or it does not exist! ");
+            LOGGER.info("You entered an incorrect network name, or it does not exist! ");
+            // print("You entered an incorrect network name, or it does not exist! ");
         }
         return network;
     }

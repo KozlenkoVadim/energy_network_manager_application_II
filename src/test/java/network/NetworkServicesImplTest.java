@@ -1,12 +1,14 @@
 package network;
 
+import network.model.Node;
 import network.services.NetworkServices;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 class NetworkServicesImplTest {
-
+    private static final Logger LOGGER = Logger.getLogger("NetworkServicesImplTest");
     @Test
     void deleteNetwork() {
     }
@@ -15,12 +17,20 @@ class NetworkServicesImplTest {
     void searchNetworks() {
         NetworkServices networkServices;
         networkServices =  new NetworkServicesImpl();
-        networkServices.searchNetworks("/media/vadim_kozlenko/MyFiles/GitRepositories/Energy_network_manager_application/src/main/resources/");
+        networkServices.searchNetworks();
 
     }
 
     @Test
-    void load() {
+    void load() throws IOException {
+        Node node;
+            node = new NetworkServicesImpl().load("s.json");
+        try {
+            System.out.println(node.toString());
+        }catch (NullPointerException e){
+            LOGGER.info("node is null");
+        }
+
     }
 
     @Test
