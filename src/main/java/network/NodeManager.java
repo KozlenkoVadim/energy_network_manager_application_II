@@ -8,11 +8,7 @@ import java.util.logging.Logger;
 
 
 public class NodeManager implements NodeServices {
-    private static final Logger LOGGER = Logger.getLogger("NodeManager");
-
-    private static void print(String string) {
-        System.out.println(string);
-    }
+    private static final Logger LOGGER = Logger.getLogger(NodeManager.class.toString());
 
     @Override
     public Node searchNodeInNetwork(Node network, String id) {
@@ -20,13 +16,11 @@ public class NodeManager implements NodeServices {
         try {
             if (network.getId().equals(id)) {
                 LOGGER.info("Your node is " + network.getName() + " !");
-                //print("Your node is " + network.getName() + " !");
                 entry = network;
             } else {
                 for (Node node : network.getChildren()) {
                     if (node.getId().equals(id)) {
                         LOGGER.info("Your node is " + node.getName() + " !");
-                        //print("Your node is " + node.getName() + " !");
                         entry = node;
                     } else if (node.getChildren() != null) {
                         searchNodeInNetwork(node, id);
@@ -35,7 +29,6 @@ public class NodeManager implements NodeServices {
             }
         } catch (NullPointerException e) {
             LOGGER.info("You entered an incorrect node name, entry's id, or it does not exist! ");
-           // print("You entered an incorrect node name, entry's id, or it does not exist! ");
         }
         return entry;
     }
@@ -60,7 +53,6 @@ public class NodeManager implements NodeServices {
             }
         } catch (NullPointerException e) {
             LOGGER.info("You entered an incorrect network name, or it does not exist! ");
-            // print("You entered an incorrect network name, or it does not exist! ");
         }
         return network;
     }

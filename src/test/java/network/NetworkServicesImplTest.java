@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 class NetworkServicesImplTest {
-    private static final Logger LOGGER = Logger.getLogger("NetworkServicesImplTest");
+    private static final Logger LOGGER = Logger.getLogger(NetworkServicesImplTest.class.toString());
     @Test
     void deleteNetwork() {
     }

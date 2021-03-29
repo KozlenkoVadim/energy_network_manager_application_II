@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @Setter
 @Getter
 public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
-    private static final Logger LOGGER = Logger.getLogger("NetworkServicesImpl");
+    private static final Logger LOGGER = Logger.getLogger(NetworkServicesImpl.class.toString());
 
     private Node network;
 
