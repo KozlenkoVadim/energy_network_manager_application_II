@@ -43,14 +43,14 @@ class NodeBuilderFabricTest {
     @Test
     void toBuildRes() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
-        Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes("10").units("MWatt").build());
+        Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
         System.out.println(actualNode.toString());
         Node expected = new Node();
         expected.setId("rsc-10");
         expected.setType(Types.RESOURCE);
         expected.setName("Consumer");
         expected.setDescription("Load that belong to fdr-2");
-        expected.setParams(Params.builder().consumes("10").units("MWatt").build());
+        expected.setParams(Params.builder().consumes(10).units("MWatt").build());
         expected.setChildren(null);
         Assert.assertEquals(actualNode, expected);
     }
@@ -58,14 +58,14 @@ class NodeBuilderFabricTest {
     @Test
     void toBuildResFeilure() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
-        Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes("10").units("MWatt").build());
+        Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
         System.out.println(actualNode.toString());
         Node expected = new Node();
         expected.setId("rsc-10");
         expected.setType(Types.RESOURCE);
         expected.setName("Consumer");
         expected.setDescription("Load that belong to fdr-2");
-        expected.setParams(Params.builder().consumes("10").units("MWatt").build());
+        expected.setParams(Params.builder().consumes(10).units("MWatt").build());
         expected.setChildren(new ArrayList<>());
         Assert.assertEquals(actualNode, expected);
     }

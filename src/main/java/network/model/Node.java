@@ -12,13 +12,13 @@ import java.util.ArrayList;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Node {
+public class  Node {
     private String id;
     private Types type;
     private String name;
     private String description;
     private Params params;
-    private ArrayList<Node> children = new ArrayList<>();
+    private ArrayList<Node> children;
 
     public void setChild(Node child) {
         this.children.add(child);

@@ -33,6 +33,7 @@ public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
     public List<String> searchNetworks() {
         List<File> rezultList = new LinkedList<>();
         List<String> nameList = new LinkedList<>();
+        LOGGER.info("searching...");
         fileSearch(new File(NetworkRepository.PATH_NAME), rezultList);
         for (File file : rezultList) {
             System.out.println(file.getName());
@@ -82,15 +83,9 @@ public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
             objectMapper.writeValue(new File(NetworkRepository.PATH_NAME + name), network);
         } catch (FileAlreadyExistsException e) {
             LOGGER.info("You entered a File name that all ready exist! ");
-            //print("You entered a File name that all ready exist! ");
         } catch (IOException e) {
             LOGGER.info("You are doing some thing wrong! ");
-            //print("You are doing some thing wrong! ");
         }
-    }
-
-    private static void print(String string) {
-        System.out.println(string);
     }
 
     private static InputStream stream(String pathName) {
@@ -99,7 +94,6 @@ public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
             inputStream = new FileInputStream(pathName);
         } catch (IOException e) {
             LOGGER.info("Some things wrong with your stream, maybe your path is failure !");
-            //print("Some things wrong with your stream, maybe your path is failure !");
         }
         return inputStream;
     }

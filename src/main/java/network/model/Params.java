@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 public class Params {
     private double lon;
     private double lat;
-    private String consumes;
+    private int consumes;
     private String units;
 
     @Override
     public String toString() {
         return
-                "latitude = " + lon +"\n"+
-                        "   " + "longitude = " + lat +"\n"+
+                "longitude = " + lon +"\n"+
+                        "   " + "latitude = " + lat +"\n"+
                         "   " + "consumes = " + consumes +"\n"+
                         "   " + "units = " + units;
     }

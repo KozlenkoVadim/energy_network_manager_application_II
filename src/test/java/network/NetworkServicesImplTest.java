@@ -24,13 +24,13 @@ class NetworkServicesImplTest {
     @Test
     void load() throws IOException {
         Node node;
-            node = new NetworkServicesImpl().load("s.json");
-        try {
-            System.out.println(node.toString());
-        }catch (NullPointerException e){
-            LOGGER.info("node is null");
-        }
+            node = new NetworkServicesImpl().load("sn.json");
 
+            try{
+                System.out.println(node.toString());
+            }catch (NullPointerException e){
+                LOGGER.info("node is null");
+            }
     }
 
     @Test
