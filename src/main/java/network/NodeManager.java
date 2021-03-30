@@ -3,8 +3,11 @@ package network;
 
 import lombok.Data;
 import network.model.Node;
+import network.model.Params;
+import network.model.Types;
 import network.services.NodeServices;
 
+import java.util.Locale;
 import java.util.logging.Logger;
 
 @Data
@@ -13,9 +16,10 @@ public class NodeManager implements NodeServices {
     private Node entry;
     private Node node;
     private Node network;
+
     @Override
     public Node searchNodeInNetwork(Node network, String id) {
-
+        LOGGER.info("searching... ");
         try {
             if (network.getId().equals(id)) {
                 LOGGER.info("Your node is " + network.getName() + " !");
@@ -33,11 +37,13 @@ public class NodeManager implements NodeServices {
         } catch (NullPointerException e) {
             LOGGER.info("You entered an incorrect node name, entry's id, or it does not exist! ");
         }
+        LOGGER.info("completed successfully !");
         return entry;
     }
 
     @Override
     public Node deleteNodeFromNetwork(Node network, String id) {
+        LOGGER.info("trying delete node which have id: " + id);
         try {
             if (!network.getId().equals(id)) {
                 if (network.getChildren() != null) {
@@ -55,29 +61,58 @@ public class NodeManager implements NodeServices {
                 network = null;
             }
         } catch (NullPointerException e) {
-            LOGGER.info("You entered an incorrect network name, or it does not exist! ");
+            LOGGER.info("you entered an incorrect network name, or it does not exist! ");
         }
+        LOGGER.info("completed successfully !");
         return network;
     }
 
     @Override
     public Node updateNode(Node network, String id, String field, String newParam) {
-        node = new NodeManager().searchNodeInNetwork(network, id);
-        switch (field) {
-            case "id":
-                node.setId(newParam);
-            case "name":
-                node.setName(newParam);
-            case "description":
-                node.setDescription(newParam);
+        LOGGER.info("trying update node which have id: " + id);
+        NodeManager nodeManager = new NodeManager();
+        node = nodeManager.searchNodeInNetwork(network, id);
+        if (node.getType().equals(Types.NETWORK) || node.getType().equals(Types.SUBSTATION) || node.getType().equals(Types.TRANSFORMER) || node.getType().equals(Types.FEEDER)) {
+            switch (field) {
+                case "id":
+                    node.setId(newParam);
+                    break;
+                case "name":
+                    node.setName(newParam);
+                    break;
+                case "description":
+                    node.setDescription(newParam);
+                    break;
+                case "params":
+                    node.setParams(Params.builder().lon(Double.valueOf(newParam)).lat(Double.valueOf(newParam)).build());
+                    break;
+            }
+        } else {
+            switch (field) {
+                case "id":
+                    node.setId(newParam);
+                    break;
+                case "name":
+                    node.setName(newParam);
+                    break;
+                case "description":
+                    node.setDescription(newParam);
+                    break;
+                case "params":
+                    node.setParams(Params.builder().consumes(Integer.valueOf(newParam)).units(newParam).build());
+                    break;
+            }
         }
-        return node;
+        LOGGER.info("completed successfully !");
+        return network;
     }
 
     @Override
     public Node addNode(Node network, Node node, String parentId) {
-        Node parent = new NodeManager().searchNodeInNetwork(network, parentId);
-        parent.setChild(node);
+        LOGGER.info("trying to add node");
+        NodeManager nodeManager = new NodeManager();
+        nodeManager.searchNodeInNetwork(network, parentId).setChild(node);
+        LOGGER.info("completed successfully !");
         return network;
     }
 }

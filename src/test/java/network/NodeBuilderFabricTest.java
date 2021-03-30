@@ -26,7 +26,7 @@ class NodeBuilderFabricTest {
     }
 
     @Test
-    void toBuildFeilure() {
+    void toBuildFailure() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
         Node actualNode = nodeBuilderFabric.toBuild("id- 1",Types.NETWORK,"nt- 1","main network", Params.builder().lon(40.3).lat(40.3).build());
         System.out.println(actualNode.toString());
@@ -56,7 +56,7 @@ class NodeBuilderFabricTest {
     }
 
     @Test
-    void toBuildResFeilure() {
+    void toBuildResFailure() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
         Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
         System.out.println(actualNode.toString());

@@ -23,6 +23,7 @@ public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
     private static final Logger LOGGER = Logger.getLogger(NetworkServicesImpl.class.toString());
 
     private Node network;
+    private List<String> nameList;
 
     @Override
     public void deleteNetwork(Node network) {
@@ -32,7 +33,7 @@ public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
     @Override
     public List<String> searchNetworks() {
         List<File> rezultList = new LinkedList<>();
-        List<String> nameList = new LinkedList<>();
+        nameList = new LinkedList<>();
         LOGGER.info("searching...");
         fileSearch(new File(NetworkRepository.PATH_NAME), rezultList);
         for (File file : rezultList) {
