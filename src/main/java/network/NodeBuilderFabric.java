@@ -1,7 +1,6 @@
 package network;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import network.model.Node;
 import network.model.Params;
 import network.model.Types;

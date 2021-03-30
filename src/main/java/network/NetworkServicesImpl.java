@@ -100,6 +100,6 @@ public class NetworkServicesImpl implements NetworkServices, NetworkRepository {
 
     @Override
     public String toString() {
-        return getNetwork().toString();
+        return network.toString();
     }
 }

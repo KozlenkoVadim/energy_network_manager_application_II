@@ -1,18 +1,21 @@
 package network;
 
 
+import lombok.Data;
 import network.model.Node;
 import network.services.NodeServices;
 
 import java.util.logging.Logger;
 
-
+@Data
 public class NodeManager implements NodeServices {
     private static final Logger LOGGER = Logger.getLogger(NodeManager.class.toString());
-
+    private Node entry;
+    private Node node;
+    private Node network;
     @Override
     public Node searchNodeInNetwork(Node network, String id) {
-        Node entry = null;
+
         try {
             if (network.getId().equals(id)) {
                 LOGGER.info("Your node is " + network.getName() + " !");
@@ -59,7 +62,7 @@ public class NodeManager implements NodeServices {
 
     @Override
     public Node updateNode(Node network, String id, String field, String newParam) {
-        Node node = new NodeManager().searchNodeInNetwork(network, id);
+        node = new NodeManager().searchNodeInNetwork(network, id);
         switch (field) {
             case "id":
                 node.setId(newParam);
