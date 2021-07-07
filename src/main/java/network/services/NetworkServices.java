@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface NetworkServices {
 
-    public static void toOverview(Node network) {
+    public static void overview(Node network) {
         try {
             System.out.println('{' + "id:" + network.getId() + '}' + " " + '{' + "name: " + network.getName() + '}' + " " + '{' + "description: " + network.getDescription() + '}');
             for (Node node : network.getChildren()) {
                 if (node.getChildren() != null) {
-                    toOverview(node);
+                    overview(node);
                 } else if (node.getChildren() == null) {
                     System.out.println('{' + "id:" + node.getId() + '}' + " " + '{' + "name: " + node.getName() + '}' + " " + '{' + "description: " + node.getDescription() + '}');
                 }

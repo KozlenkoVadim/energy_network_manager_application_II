@@ -13,7 +13,7 @@ public class NodeBuilderFabric{
     private static final Logger LOGGER = Logger.getLogger(NodeBuilderFabric.class.toString());
     private Node newNode;
 
-    public Node toBuild(String id, Types types, String name, String description, Params params) {
+    public Node buildEntry(String id, Types types, String name, String description, Params params) {
 
         if (types.equals(Types.NETWORK) || types.equals(Types.SUBSTATION) || types.equals(Types.TRANSFORMER) || types.equals(Types.FEEDER)) {
             newNode = Node.builder().id(id).type(types).name(name).description(description).params(Params.builder().lat(params.getLat()).lon(params.getLon()).build()).children(new ArrayList<>()).build();

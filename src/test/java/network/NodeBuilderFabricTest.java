@@ -11,9 +11,9 @@ import java.util.ArrayList;
 class NodeBuilderFabricTest {
 
     @Test
-    void toBuild() {
+    void build() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
-        Node actualNode = nodeBuilderFabric.toBuild("id-1", Types.NETWORK,"nt-1","main-network", Params.builder().lon(40.3).lat(40.3).build());
+        Node actualNode = nodeBuilderFabric.buildEntry("id-1", Types.NETWORK,"nt-1","main-network", Params.builder().lon(40.3).lat(40.3).build());
         System.out.println(actualNode.toString());
         Node expected = new Node();
         expected.setId("id-1");
@@ -26,9 +26,9 @@ class NodeBuilderFabricTest {
     }
 
     @Test
-    void toBuildFailure() {
+    void buildFailure() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
-        Node actualNode = nodeBuilderFabric.toBuild("id- 1",Types.NETWORK,"nt- 1","main network", Params.builder().lon(40.3).lat(40.3).build());
+        Node actualNode = nodeBuilderFabric.buildEntry("id- 1",Types.NETWORK,"nt- 1","main network", Params.builder().lon(40.3).lat(40.3).build());
         System.out.println(actualNode.toString());
         Node expected = new Node();
         expected.setId("id-1");
@@ -41,9 +41,9 @@ class NodeBuilderFabricTest {
     }
 
     @Test
-    void toBuildRes() {
+    void buildRes() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
-        Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
+        Node actualNode = nodeBuilderFabric.buildEntry("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
         System.out.println(actualNode.toString());
         Node expected = new Node();
         expected.setId("rsc-10");
@@ -56,9 +56,9 @@ class NodeBuilderFabricTest {
     }
 
     @Test
-    void toBuildResFailure() {
+    void buildResFailure() {
         NodeBuilderFabric nodeBuilderFabric = new NodeBuilderFabric();
-        Node actualNode = nodeBuilderFabric.toBuild("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
+        Node actualNode = nodeBuilderFabric.buildEntry("rsc-10",Types.RESOURCE,"Consumer","Load that belong to fdr-2", Params.builder().consumes(10).units("MWatt").build());
         System.out.println(actualNode.toString());
         Node expected = new Node();
         expected.setId("rsc-10");
