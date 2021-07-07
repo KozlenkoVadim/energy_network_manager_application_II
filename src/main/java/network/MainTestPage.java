@@ -16,9 +16,9 @@ public class MainTestPage {
             network = networkBuilder.execute();
 
             NetworkServices.overview(network);
-
-            }
+            System.out.println(network.toString());
         }
     }
+}
 
 

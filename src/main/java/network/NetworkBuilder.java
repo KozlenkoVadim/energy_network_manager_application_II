@@ -6,9 +6,6 @@ import lombok.Setter;
 import network.model.Node;
 import network.model.Params;
 import network.model.Types;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -17,31 +14,25 @@ import java.util.logging.Logger;
 public class NetworkBuilder {
     private static final Logger LOGGER = Logger.getLogger(NetworkBuilder.class.toString());
     private Node network;
-    private List<String> list;
 
     public Node execute() {
-        NodeBuilderFabric newNetwork = new NodeBuilderFabric();
-        newNetwork = create(Types.NETWORK,newNetwork);
+        NodeBuilderFabric newNetwork = create(Types.NETWORK, new NodeBuilderFabric());
 
         int numberOfSub = scan(Types.NETWORK);
         for (int i = 0; i < numberOfSub; i++) {
-            NodeBuilderFabric newSubstation = new NodeBuilderFabric();
-            newSubstation = create(Types.SUBSTATION,newSubstation);
+            NodeBuilderFabric newSubstation = create(Types.SUBSTATION, new NodeBuilderFabric());
 
             int numberOfTrance = scan(Types.SUBSTATION);
             for (int a = 0; a < numberOfTrance; a++) {
-                NodeBuilderFabric newTransformer = new NodeBuilderFabric();
-                newTransformer = create(Types.TRANSFORMER, newTransformer);
+                NodeBuilderFabric newTransformer = create(Types.TRANSFORMER, new NodeBuilderFabric());
 
                 int numberOfFeed = scan(Types.TRANSFORMER);
                 for (int r = 0; r < numberOfFeed; r++) {
-                    NodeBuilderFabric newFeeder = new NodeBuilderFabric();
-                    newFeeder = create(Types.FEEDER,newFeeder);
+                    NodeBuilderFabric newFeeder = create(Types.FEEDER, new NodeBuilderFabric());
 
                     int numberOfRes = scan(Types.FEEDER);
                     for (int m = 0; m < numberOfRes; m++) {
-                        NodeBuilderFabric newResource = new NodeBuilderFabric();
-                        newResource = createRes(newResource);
+                        NodeBuilderFabric newResource = createRes(new NodeBuilderFabric());
 
                         newFeeder.getNewNode().setChild(newResource.getNewNode());
                     }
@@ -65,46 +56,35 @@ public class NetworkBuilder {
     }
 
     private NodeBuilderFabric createRes(NodeBuilderFabric newNodeBuilderFabric) {
-        list = new ArrayList<>();
         System.out.println("Write the name, description, consumes(int value) for yours " + Types.RESOURCE + ": ");
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNext()) {
-            list.add(scanner.nextLine());
-            list.add(scanner.nextLine());
-            list.add(String.valueOf(scanner.nextInt()));
-            list.add(scanner.nextLine());
+            newNodeBuilderFabric
+                    .buildEntry(generateId(Types.RESOURCE),
+                            Types.RESOURCE,
+                            scanner.nextLine(),
+                            scanner.nextLine(),
+                            Params.builder()
+                                    .consumes(scanner.nextInt()).units("MWatt")
+                                    .build());
         }
-        newNodeBuilderFabric
-                .buildEntry(generateId(Types.RESOURCE),
-                        Types.RESOURCE,
-                        list.get(0),
-                        list.get(1),
-                        Params.builder()
-                                .consumes(Integer.valueOf(list.get(2)))
-                                .units(list.get(3))
-                                .build());
         return newNodeBuilderFabric;
     }
 
     private NodeBuilderFabric create(Types types, NodeBuilderFabric newNodeBuilderFabric) {
-        list = new ArrayList<>();
         System.out.println("Write the name, description,longitude(double value),latitude(double value) for yours " + types + ": ");
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNext()) {
-            list.add(scanner.nextLine());
-            list.add(scanner.nextLine());
-            list.add(String.valueOf(scanner.nextDouble()));
-            list.add(String.valueOf(scanner.nextDouble()));
+            newNodeBuilderFabric
+                    .buildEntry(generateId(types),
+                            types,
+                            scanner.nextLine(),
+                            scanner.nextLine(),
+                            Params.builder()
+                                    .lon(scanner.nextDouble())
+                                    .lat(scanner.nextDouble())
+                                    .build());
         }
-        newNodeBuilderFabric
-                .buildEntry(generateId(types),
-                        types,
-                        list.get(0),
-                        list.get(1),
-                        Params.builder()
-                                .lon(Double.valueOf(list.get(2)))
-                                .lat(Double.valueOf(list.get(3)))
-                                .build());
         return newNodeBuilderFabric;
     }
 
